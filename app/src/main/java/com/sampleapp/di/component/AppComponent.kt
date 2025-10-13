@@ -1,0 +1,20 @@
+package com.sampleapp.di.component
+
+import com.sampleapp.di.module.ContextModule
+import com.sampleapp.di.module.DataSourceModule
+import com.sampleapp.di.module.NetworkModule
+import com.sampleapp.di.module.RepositoryModule
+import com.sampleapp.feature.quiz.ui.activity.QuizActivity
+import dagger.Component
+import javax.inject.Singleton
+
+@Singleton
+@Component(modules = [
+    ContextModule::class,
+    NetworkModule::class, 
+    DataSourceModule::class, 
+    RepositoryModule::class
+])
+interface AppComponent {
+    fun inject(activity: QuizActivity)
+}

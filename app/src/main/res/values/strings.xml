@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sample App</string>
+    <string name="quiz">Quiz</string>
+    <string name="some_error">Some Error Occurred</string>
+    <string name="no_questions_available">No questions available</string>
+    
+    <!-- Quiz Activity -->
+    <string name="question_number_format">Question %1$d of %2$d</string>
+    <string name="streak_notification">%d questions streak achieved !!</string>
+    <string name="error_message">Error: %s</string>
+    <string name="skip">Skip</string>
+    
+    <!-- Result Activity -->
+    <string name="close">Close</string>
+    <string name="quiz_results">Quiz Results</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="quiz_summary">You\'ve completed the quiz. Here\'s your\nperformance summary:</string>
+    <string name="correct_answers_label">Correct\nAnswers:</string>
+    <string name="highest_streak_label">Highest Streak:</string>
+    <string name="restart_quiz">Restart Quiz</string>
+</resources>

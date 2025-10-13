@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextStyle">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="F8" parent="TextStyle">
+        <item name="android:textSize">8dp</item>
+        <item name="lineHeight">12dp</item>
+    </style>
+
+    <style name="F10" parent="TextStyle">
+        <item name="android:textSize">10dp</item>
+        <item name="lineHeight">16dp</item>
+    </style>
+
+    <style name="F12" parent="TextStyle">
+        <item name="android:textSize">12dp</item>
+        <item name="lineHeight">18dp</item>
+    </style>
+
+    <style name="F14" parent="TextStyle">
+        <item name="android:textSize">14dp</item>
+        <item name="lineHeight">22dp</item>
+    </style>
+
+    <style name="F16" parent="TextStyle">
+        <item name="android:textSize">16dp</item>
+        <item name="lineHeight">24dp</item>
+    </style>
+
+    <style name="F18" parent="TextStyle">
+        <item name="android:textSize">18dp</item>
+        <item name="lineHeight">30dp</item>
+    </style>
+
+    <style name="F20" parent="TextStyle">
+        <item name="android:textSize">20dp</item>
+        <item name="lineHeight">30dp</item>
+    </style>
+
+    <style name="F22" parent="TextStyle">
+        <item name="android:textSize">22dp</item>
+        <item name="lineHeight">32dp</item>
+    </style>
+
+    <style name="F24" parent="TextStyle">
+        <item name="android:textSize">24dp</item>
+        <item name="lineHeight">32dp</item>
+    </style>
+
+    <style name="F26" parent="TextStyle">
+        <item name="android:textSize">26dp</item>
+        <item name="lineHeight">36dp</item>
+    </style>
+
+    <style name="F28" parent="TextStyle">
+        <item name="android:textSize">28dp</item>
+        <item name="lineHeight">36dp</item>
+    </style>
+
+    <style name="F30" parent="TextStyle">
+        <item name="android:textSize">30dp</item>
+        <item name="lineHeight">40dp</item>
+    </style>
+
+    <style name="F32" parent="TextStyle">
+        <item name="android:textSize">32dp</item>
+        <item name="lineHeight">48dp</item>
+    </style>
+
+    <!-- Regular Font Styles -->
+    <style name="F8.Regular" parent="F8">
+        <item name="fontFamily">@font/manrope_regular</item>
+    </style>
+
+    <style name="F10.Regular" parent="F10">
+        <item name="fontFamily">@font/manrope_regular</item>
+    </style>
+
+    <style name="F12.Regular" parent="F12">
+        <item name="fontFamily">@font/manrope_regular</item>
+    </style>
+
+    <style name="F14.Regular" parent="F14">
+        <item name="fontFamily">@font/manrope_regular</item>
+    </style>
+
+    <style name="F16.Regular" parent="F16">
+        <item name="fontFamily">@font/manrope_regular</item>
+    </style>
+
+    <style name="F18.Regular" parent="F18">
+        <item name="fontFamily">@font/manrope_regular</item>
+    </style>
+
+    <style name="F20.Regular" parent="F20">
+        <item name="fontFamily">@font/manrope_regular</item>
+    </style>
+
+    <style name="F22.Regular" parent="F22">
+        <item name="fontFamily">@font/manrope_regular</item>
+    </style>
+
+    <style name="F24.Regular" parent="F24">
+        <item name="fontFamily">@font/manrope_regular</item>
+    </style>
+
+    <style name="F26.Regular" parent="F26">
+        <item name="fontFamily">@font/manrope_regular</item>
+    </style>
+
+    <style name="F28.Regular" parent="F28">
+        <item name="fontFamily">@font/manrope_regular</item>
+    </style>
+
+    <style name="F30.Regular" parent="F30">
+        <item name="fontFamily">@font/manrope_regular</item>
+    </style>
+
+    <style name="F32.Regular" parent="F32">
+        <item name="fontFamily">@font/manrope_regular</item>
+    </style>
+
+    <!-- Medium Font Styles -->
+    <style name="F8.Medium" parent="F8">
+        <item name="fontFamily">@font/manrope_medium</item>
+    </style>
+
+    <style name="F10.Medium" parent="F10">
+        <item name="fontFamily">@font/manrope_medium</item>
+    </style>
+
+    <style name="F12.Medium" parent="F12">
+        <item name="fontFamily">@font/manrope_medium</item>
+    </style>
+
+    <style name="F14.Medium" parent="F14">
+        <item name="fontFamily">@font/manrope_medium</item>
+    </style>
+
+    <style name="F16.Medium" parent="F16">
+        <item name="fontFamily">@font/manrope_medium</item>
+    </style>
+
+    <style name="F18.Medium" parent="F18">
+        <item name="fontFamily">@font/manrope_medium</item>
+    </style>
+
+    <style name="F20.Medium" parent="F20">
+        <item name="fontFamily">@font/manrope_medium</item>
+    </style>
+
+    <style name="F22.Medium" parent="F22">
+        <item name="fontFamily">@font/manrope_medium</item>
+    </style>
+
+    <style name="F24.Medium" parent="F24">
+        <item name="fontFamily">@font/manrope_medium</item>
+    </style>
+
+    <style name="F26.Medium" parent="F26">
+        <item name="fontFamily">@font/manrope_medium</item>
+    </style>
+
+    <style name="F28.Medium" parent="F28">
+        <item name="fontFamily">@font/manrope_medium</item>
+    </style>
+
+    <style name="F30.Medium" parent="F30">
+        <item name="fontFamily">@font/manrope_medium</item>
+    </style>
+
+    <style name="F32.Medium" parent="F32">
+        <item name="fontFamily">@font/manrope_medium</item>
+    </style>
+
+    <!-- SemiBold Font Styles -->
+    <style name="F8.SemiBold" parent="F8">
+        <item name="fontFamily">@font/manrope_semibold</item>
+    </style>
+
+    <style name="F10.SemiBold" parent="F10">
+        <item name="fontFamily">@font/manrope_semibold</item>
+    </style>
+
+    <style name="F12.SemiBold" parent="F12">
+        <item name="fontFamily">@font/manrope_semibold</item>
+    </style>
+
+    <style name="F14.SemiBold" parent="F14">
+        <item name="fontFamily">@font/manrope_semibold</item>
+    </style>
+
+    <style name="F16.SemiBold" parent="F16">
+        <item name="fontFamily">@font/manrope_semibold</item>
+    </style>
+
+    <style name="F18.SemiBold" parent="F18">
+        <item name="fontFamily">@font/manrope_semibold</item>
+    </style>
+
+    <style name="F20.SemiBold" parent="F20">
+        <item name="fontFamily">@font/manrope_semibold</item>
+    </style>
+
+    <style name="F22.SemiBold" parent="F22">
+        <item name="fontFamily">@font/manrope_semibold</item>
+    </style>
+
+    <style name="F24.SemiBold" parent="F24">
+        <item name="fontFamily">@font/manrope_semibold</item>
+    </style>
+
+    <style name="F26.SemiBold" parent="F26">
+        <item name="fontFamily">@font/manrope_semibold</item>
+    </style>
+
+    <style name="F28.SemiBold" parent="F28">
+        <item name="fontFamily">@font/manrope_semibold</item>
+    </style>
+
+    <style name="F30.SemiBold" parent="F30">
+        <item name="fontFamily">@font/manrope_semibold</item>
+    </style>
+
+    <style name="F32.SemiBold" parent="F32">
+        <item name="fontFamily">@font/manrope_semibold</item>
+    </style>
+
+    <!-- Bold Font Styles -->
+    <style name="F8.Bold" parent="F8">
+        <item name="fontFamily">@font/manrope_bold</item>
+    </style>
+
+    <style name="F10.Bold" parent="F10">
+        <item name="fontFamily">@font/manrope_bold</item>
+    </style>
+
+    <style name="F12.Bold" parent="F12">
+        <item name="fontFamily">@font/manrope_bold</item>
+    </style>
+
+    <style name="F14.Bold" parent="F14">
+        <item name="fontFamily">@font/manrope_bold</item>
+    </style>
+
+    <style name="F16.Bold" parent="F16">
+        <item name="fontFamily">@font/manrope_bold</item>
+    </style>
+
+    <style name="F18.Bold" parent="F18">
+        <item name="fontFamily">@font/manrope_bold</item>
+    </style>
+
+    <style name="F20.Bold" parent="F20">
+        <item name="fontFamily">@font/manrope_bold</item>
+    </style>
+
+    <style name="F22.Bold" parent="F22">
+        <item name="fontFamily">@font/manrope_bold</item>
+    </style>
+
+    <style name="F24.Bold" parent="F24">
+        <item name="fontFamily">@font/manrope_bold</item>
+    </style>
+
+    <style name="F26.Bold" parent="F26">
+        <item name="fontFamily">@font/manrope_bold</item>
+    </style>
+
+    <style name="F28.Bold" parent="F28">
+        <item name="fontFamily">@font/manrope_bold</item>
+    </style>
+
+    <style name="F30.Bold" parent="F30">
+        <item name="fontFamily">@font/manrope_bold</item>
+    </style>
+
+    <style name="F32.Bold" parent="F32">
+        <item name="fontFamily">@font/manrope_bold</item>
+    </style>
+
+</resources> 
