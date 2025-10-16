@@ -23,7 +23,6 @@ class QuizActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityQuizBinding
     private var canNavigate = true
-    private var module: Module? = null
 
     companion object {
         private const val ANIMATION_DURATION = 300L
@@ -57,8 +56,9 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun getBundleData() {
-        module = intent.getParcelableExtra(MODULE)
-        viewModel.loadQuestions()
+        intent.getParcelableExtra<Module?>(MODULE)?.questionsUrl?.let {
+            viewModel.loadQuestions(it)
+        }
     }
 
     private fun setupClickListeners() {

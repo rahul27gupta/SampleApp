@@ -4,5 +4,5 @@ import com.sampleapp.feature.quiz.models.Question
 import com.sampleapp.network.Resource
 
 interface QuizRepository {
-    suspend fun getQuestions(): Resource<ArrayList<Question>>
+    suspend fun getQuestions(questionsUrl: String): Resource<ArrayList<Question>>
 }

@@ -14,10 +14,10 @@ class QuizRepositoryImpl @Inject constructor(
     private val context: Context
 ) : QuizRepository {
 
-    override suspend fun getQuestions(): Resource<ArrayList<Question>> {
+    override suspend fun getQuestions(questionsUrl: String): Resource<ArrayList<Question>> {
         return withContext(Dispatchers.IO) {
             try {
-                val response = dataSource.fetchQuestions()
+                val response = dataSource.fetchQuestions(questionsUrl)
                 Resource.Success(response)
             } catch (e: Exception) {
                 Resource.Error(null, e.message ?: context.getString(R.string.some_error))

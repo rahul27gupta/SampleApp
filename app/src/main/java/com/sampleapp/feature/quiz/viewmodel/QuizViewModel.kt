@@ -29,10 +29,10 @@ class QuizViewModel @Inject constructor(
     private var longestStreak = 0
     private val questionHistory = mutableListOf<QuestionState>()
 
-    fun loadQuestions() {
+    fun loadQuestions(questionsUrl: String) {
         viewModelScope.launch {
             _uiState.value = QuizUiState.Loading
-            when (val result = repository.getQuestions()) {
+            when (val result = repository.getQuestions(questionsUrl)) {
                 is Resource.Success -> {
                     questions = result.data ?: emptyList()
                     if (questions.isNotEmpty()) {
