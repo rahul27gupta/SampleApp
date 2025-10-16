@@ -1,6 +1,7 @@
 package com.sampleapp.feature.modules.ui.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -9,9 +10,13 @@ import androidx.databinding.DataBindingUtil
 import com.sampleapp.R
 import com.sampleapp.SampleApp
 import com.sampleapp.databinding.ActivityModulesBinding
+import com.sampleapp.feature.modules.models.Module
+import com.sampleapp.feature.modules.ui.adapter.ModulesAdaptor
+import com.sampleapp.feature.modules.ui.adapter.ModulesListener
 import com.sampleapp.feature.modules.viewModel.ModulesViewModel
+import com.sampleapp.network.Resource
 
-class ModulesActivity : AppCompatActivity() {
+class ModulesActivity : AppCompatActivity(), ModulesListener {
     private lateinit var binding: ActivityModulesBinding
     private lateinit var viewModel: ModulesViewModel
 
@@ -32,7 +37,26 @@ class ModulesActivity : AppCompatActivity() {
         setupObserver()
     }
 
-    private fun setupObserver() {}
+    private fun setupObserver() {
+        viewModel.observeModules().observe(this) {
+            when (it) {
+                is Resource.Error -> binding.progressBar.visibility = View.GONE
+                is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
+                is Resource.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    binding.rvModules.adapter =
+                        ModulesAdaptor(it.data ?: arrayListOf(), this@ModulesActivity)
+                }
+            }
+        }
+    }
 
-    private fun setupView() {}
+    private fun setupView() {
+        binding.appBar.tvTitle.text = getString(R.string.modules)
+        viewModel.getModules()
+    }
+
+    override fun onModulesClick(data: Module?) {
+
+    }
 }

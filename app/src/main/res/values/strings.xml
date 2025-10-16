@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">Sample App</string>
     <string name="quiz">Quiz</string>
+    <string name="modules">Modules</string>
     <string name="some_error">Some Error Occurred</string>
     <string name="no_questions_available">No questions available</string>
 
