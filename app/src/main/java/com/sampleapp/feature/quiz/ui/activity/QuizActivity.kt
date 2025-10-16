@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.button.MaterialButton
 import com.sampleapp.R
 import com.sampleapp.SampleApp
@@ -19,8 +20,9 @@ import javax.inject.Inject
 class QuizActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var viewModel: QuizViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
+    private lateinit var viewModel: QuizViewModel
     private lateinit var binding: ActivityQuizBinding
     private var canNavigate = true
     private var currentModuleId: String? = null
@@ -31,6 +33,8 @@ class QuizActivity : AppCompatActivity() {
         private const val OPTION_ANIMATION_DELAY = 50L
         private const val MODULE = "module"
         private const val IS_REVIEW_MODE = "is_review_mode"
+        private const val STATE_REVIEW_MODE = "state_review_mode"
+        private const val STATE_CAN_NAVIGATE = "state_can_navigate"
 
         fun start(context: Context, module: Module, isReviewMode: Boolean = false) {
             val intent = Intent(context, QuizActivity::class.java).apply {
@@ -45,9 +49,24 @@ class QuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         initializeBindings()
         setupDependencies()
-        getBundleData()
+        initializeViewModel()
+        
+        // Restore state or get from intent
+        if (savedInstanceState != null) {
+            isReviewMode = savedInstanceState.getBoolean(STATE_REVIEW_MODE, false)
+            canNavigate = savedInstanceState.getBoolean(STATE_CAN_NAVIGATE, true)
+        } else {
+            getBundleData()
+        }
+        
         setupClickListeners()
         observeViewModel()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(STATE_REVIEW_MODE, isReviewMode)
+        outState.putBoolean(STATE_CAN_NAVIGATE, canNavigate)
     }
 
     private fun initializeBindings() {
@@ -57,6 +76,10 @@ class QuizActivity : AppCompatActivity() {
 
     private fun setupDependencies() {
         (application as SampleApp).appComponent.inject(this)
+    }
+
+    private fun initializeViewModel() {
+        viewModel = ViewModelProvider(this, viewModelFactory)[QuizViewModel::class.java]
     }
 
     private fun getBundleData() {

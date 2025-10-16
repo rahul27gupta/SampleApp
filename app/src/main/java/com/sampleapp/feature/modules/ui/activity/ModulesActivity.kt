@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.sampleapp.R
 import com.sampleapp.SampleApp
 import com.sampleapp.databinding.ActivityModulesBinding
@@ -21,8 +22,13 @@ import com.sampleapp.network.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class ModulesActivity : AppCompatActivity(), ModulesListener {
+    
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    
     private lateinit var binding: ActivityModulesBinding
     private lateinit var viewModel: ModulesViewModel
     private lateinit var moduleAdapter: ModulesAdapter
@@ -47,11 +53,15 @@ class ModulesActivity : AppCompatActivity(), ModulesListener {
         }
         val appComponent = (application as SampleApp).appComponent
         appComponent.inject(this)
-        viewModel = appComponent.injectModulesViewModel()
+        viewModel = ViewModelProvider(this, viewModelFactory)[ModulesViewModel::class.java]
         binding = DataBindingUtil.setContentView(this, R.layout.activity_modules)
         setupAdapter()
-        setupView()
         setupObserver()
+        
+        // Only fetch modules on first creation, not on config changes
+        if (savedInstanceState == null) {
+            setupView()
+        }
     }
 
     private fun setupAdapter() {
