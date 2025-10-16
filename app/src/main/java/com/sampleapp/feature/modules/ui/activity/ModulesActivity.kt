@@ -13,7 +13,7 @@ import com.sampleapp.R
 import com.sampleapp.SampleApp
 import com.sampleapp.databinding.ActivityModulesBinding
 import com.sampleapp.feature.modules.models.Module
-import com.sampleapp.feature.modules.ui.adapter.ModulesAdaptor
+import com.sampleapp.feature.modules.ui.adapter.ModulesAdapter
 import com.sampleapp.feature.modules.ui.adapter.ModulesListener
 import com.sampleapp.feature.modules.viewModel.ModulesViewModel
 import com.sampleapp.feature.quiz.ui.activity.QuizActivity
@@ -22,6 +22,7 @@ import com.sampleapp.network.Resource
 class ModulesActivity : AppCompatActivity(), ModulesListener {
     private lateinit var binding: ActivityModulesBinding
     private lateinit var viewModel: ModulesViewModel
+    private lateinit var moduleAdapter: ModulesAdapter
 
     companion object {
         fun start(context: Context) {
@@ -45,19 +46,30 @@ class ModulesActivity : AppCompatActivity(), ModulesListener {
         appComponent.inject(this)
         viewModel = appComponent.injectModulesViewModel()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_modules)
+        setupAdapter()
         setupView()
         setupObserver()
     }
 
+    private fun setupAdapter() {
+        moduleAdapter = ModulesAdapter(this@ModulesActivity)
+        binding.rvModules.adapter = moduleAdapter
+    }
+
     private fun setupObserver() {
-        viewModel.observeModules().observe(this) {
-            when (it) {
-                is Resource.Error -> binding.progressBar.visibility = View.GONE
-                is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
+        viewModel.modulesWithProgress.observe(this) { modulesResult ->
+            when (modulesResult) {
+                is Resource.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                    // Handle error - could show error message
+                }
+                is Resource.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
-                    binding.rvModules.adapter =
-                        ModulesAdaptor(it.data ?: arrayListOf(), this@ModulesActivity)
+                    val modulesWithProgress = modulesResult.data ?: emptyList()
+                    moduleAdapter.updateModules(modulesWithProgress)
                 }
             }
         }
@@ -65,10 +77,14 @@ class ModulesActivity : AppCompatActivity(), ModulesListener {
 
     private fun setupView() {
         binding.appBar.tvTitle.text = getString(R.string.modules)
-        viewModel.getModules()
+        viewModel.loadModulesWithProgress()
     }
 
-    override fun onModulesClick(data: Module?) {
+    override fun onStartClick(data: Module?) {
         data?.let { QuizActivity.start(binding.root.context, it) }
+    }
+
+    override fun onReviewClick(data: Module?) {
+        // TODO("Not yet implemented")
     }
 }

@@ -7,6 +7,7 @@ import com.sampleapp.di.module.RepositoryModule
 import com.sampleapp.feature.modules.ui.activity.ModulesActivity
 import com.sampleapp.feature.modules.viewModel.ModulesViewModel
 import com.sampleapp.feature.quiz.ui.activity.QuizActivity
+import com.sampleapp.feature.quiz.ui.activity.ResultActivity
 import dagger.Component
 import javax.inject.Singleton
 
@@ -22,5 +23,6 @@ import javax.inject.Singleton
 interface AppComponent {
     fun inject(activity: ModulesActivity)
     fun inject(activity: QuizActivity)
+    fun inject(activity: ResultActivity)
     fun injectModulesViewModel(): ModulesViewModel
 }

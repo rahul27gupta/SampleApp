@@ -20,4 +20,9 @@
     <string name="correct_answers_label">Correct\nAnswers:</string>
     <string name="highest_streak_label">Highest Streak:</string>
     <string name="restart_quiz">Restart Quiz</string>
+    <string name="finish">Finish</string>
+    
+    <!-- Module List -->
+    <string name="start">Start</string>
+    <string name="review">Review</string>
 </resources>

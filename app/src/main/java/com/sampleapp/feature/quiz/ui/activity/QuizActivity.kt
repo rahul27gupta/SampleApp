@@ -23,6 +23,7 @@ class QuizActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityQuizBinding
     private var canNavigate = true
+    private var currentModuleId: String? = null
 
     companion object {
         private const val ANIMATION_DURATION = 300L
@@ -56,8 +57,11 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun getBundleData() {
-        intent.getParcelableExtra<Module?>(MODULE)?.questionsUrl?.let {
-            viewModel.loadQuestions(it)
+        intent.getParcelableExtra<Module?>(MODULE)?.let { module ->
+            currentModuleId = module.id
+            module.questionsUrl?.let { questionsUrl ->
+                viewModel.loadQuestions(questionsUrl)
+            }
         }
     }
 
@@ -104,12 +108,14 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun handleQuizCompleted(state: QuizUiState.QuizCompleted) {
-        val intent = Intent(this, ResultActivity::class.java).apply {
-            putExtra("QUIZ_RESULT", state.result)
+        val module = intent.getParcelableExtra<Module?>(MODULE)
+        if (module != null) {
+            ResultActivity.start(this, state.result, module)
+            finish()
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        } else {
+            finish()
         }
-        startActivity(intent)
-        finish()
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 
     private fun handleError(message: String) {

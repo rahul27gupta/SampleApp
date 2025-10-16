@@ -4,62 +4,95 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View" />
         <variable
-            name="data"
+            name="module"
             type="com.sampleapp.feature.modules.models.Module" />
-
+        <variable
+            name="progress"
+            type="com.sampleapp.database.entities.ModuleProgressEntity" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:layout_margin="8dp"
+        app:cardBackgroundColor="@color/color_2A2A2A"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cvAnime"
-            android:layout_width="172dp"
-            android:layout_height="230dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/ivIcon"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp"
-                android:scaleType="fitXY"
-                app:layout_constraintEnd_toEndOf="parent"
+            <!-- Module Title -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvModuleTitle"
+                style="@style/F18.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="@{module.title}"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toStartOf="@+id/btnStatus"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@color/cardview_dark_background" />
+                tools:text="Module 1" />
 
-        </com.google.android.material.card.MaterialCardView>
+            <!-- Status Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_status_button"
+                android:minHeight="40dp"
+                android:minWidth="80dp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:text="@string/start"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:backgroundTint="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Start" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvTitle"
-            style="@style/F16.Medium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:lines="1"
-            android:text="@{data.title}"
-            app:layout_constraintTop_toBottomOf="@+id/cvAnime"
-            tools:text="Title" />
+            <!-- Progress Summary -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvProgressSummary"
+                style="@style/F14.Regular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="10 Questions | Score: 0/10"
+                android:textColor="@color/color_B0B0B0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvModuleTitle"
+                tools:text="10 Questions | Score: 8/10" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvDesc"
-            style="@style/F14.Regular"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:lines="1"
-            android:textColor="@color/color_994D52"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-            tools:text="Description" />
+            <!-- Module Description (Optional) -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvModuleDescription"
+                style="@style/F12.Regular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@{module.description}"
+                android:textColor="@color/color_B0B0B0"
+                android:visibility="@{module.description != null ? View.VISIBLE : View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvProgressSummary"
+                tools:text="Complete this module to test your knowledge"
+                tools:visibility="visible" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
 </layout>
