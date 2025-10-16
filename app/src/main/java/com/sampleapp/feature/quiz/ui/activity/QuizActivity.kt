@@ -1,5 +1,6 @@
 package com.sampleapp.feature.quiz.ui.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -9,6 +10,7 @@ import com.google.android.material.button.MaterialButton
 import com.sampleapp.R
 import com.sampleapp.SampleApp
 import com.sampleapp.databinding.ActivityQuizBinding
+import com.sampleapp.feature.modules.models.Module
 import com.sampleapp.feature.quiz.models.QuestionState
 import com.sampleapp.feature.quiz.models.QuizUiState
 import com.sampleapp.feature.quiz.viewmodel.QuizViewModel
@@ -21,20 +23,28 @@ class QuizActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityQuizBinding
     private var canNavigate = true
+    private var module: Module? = null
 
-    // Constants
     companion object {
         private const val ANIMATION_DURATION = 300L
         private const val OPTION_ANIMATION_DELAY = 50L
+        private const val MODULE = "module"
+
+        fun start(context: Context, module: Module) {
+            val intent = Intent(context, QuizActivity::class.java).apply {
+                putExtra(MODULE, module)
+            }
+            context.startActivity(intent)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initializeBindings()
         setupDependencies()
+        getBundleData()
         setupClickListeners()
         observeViewModel()
-        viewModel.loadQuestions()
     }
 
     private fun initializeBindings() {
@@ -44,6 +54,11 @@ class QuizActivity : AppCompatActivity() {
 
     private fun setupDependencies() {
         (application as SampleApp).appComponent.inject(this)
+    }
+
+    private fun getBundleData() {
+        module = intent.getParcelableExtra(MODULE)
+        viewModel.loadQuestions()
     }
 
     private fun setupClickListeners() {

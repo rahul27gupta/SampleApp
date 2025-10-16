@@ -12,6 +12,6 @@ interface ApiServices {
     @GET(ApiConstants.MODULE)
     suspend fun getQuizModules(): Response<ArrayList<Module>>
 
-    @GET(ApiConstants.QUIZ)
+    @GET(ApiConstants.QUIZ_BASE_URL)
     suspend fun getQuizQuestions(): ArrayList<Question>
 }

@@ -17,15 +17,6 @@
         android:theme="@style/Theme.SampleApp"
         tools:targetApi="31">
         <activity
-            android:name=".feature.modules.ui.activity.ModulesActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".feature.quiz.ui.activity.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.SampleApp">
@@ -35,6 +26,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".feature.modules.ui.activity.ModulesActivity"
+            android:exported="true" />
         <activity
             android:name=".feature.quiz.ui.activity.QuizActivity"
             android:exported="false"

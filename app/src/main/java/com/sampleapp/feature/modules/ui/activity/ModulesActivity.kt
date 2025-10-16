@@ -1,5 +1,7 @@
 package com.sampleapp.feature.modules.ui.activity
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -14,11 +16,21 @@ import com.sampleapp.feature.modules.models.Module
 import com.sampleapp.feature.modules.ui.adapter.ModulesAdaptor
 import com.sampleapp.feature.modules.ui.adapter.ModulesListener
 import com.sampleapp.feature.modules.viewModel.ModulesViewModel
+import com.sampleapp.feature.quiz.ui.activity.QuizActivity
 import com.sampleapp.network.Resource
 
 class ModulesActivity : AppCompatActivity(), ModulesListener {
     private lateinit var binding: ActivityModulesBinding
     private lateinit var viewModel: ModulesViewModel
+
+    companion object {
+        fun start(context: Context) {
+            val intent = Intent(context, ModulesActivity::class.java).apply {
+                // Add any extras or flags if needed
+            }
+            context.startActivity(intent)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +69,6 @@ class ModulesActivity : AppCompatActivity(), ModulesListener {
     }
 
     override fun onModulesClick(data: Module?) {
-
+        data?.let { QuizActivity.start(binding.root.context, it) }
     }
 }

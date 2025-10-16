@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.sampleapp.databinding.ActivitySplashBinding
+import com.sampleapp.feature.modules.ui.activity.ModulesActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -20,12 +21,12 @@ class SplashActivity : AppCompatActivity() {
         setContentView(binding.root)
         lifecycleScope.launch {
             delay(2500)
-            navigateToQuiz()
+            navigateToModules()
         }
     }
 
-    private fun navigateToQuiz() {
-        startActivity(Intent(this, QuizActivity::class.java))
+    private fun navigateToModules() {
+        ModulesActivity.start(binding.root.context)
         finish()
     }
 }
