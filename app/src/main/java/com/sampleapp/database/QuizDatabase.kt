@@ -3,20 +3,27 @@ package com.sampleapp.database
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import android.content.Context
 import com.sampleapp.database.dao.ModuleProgressDao
+import com.sampleapp.database.dao.QuizResultDao
 import com.sampleapp.database.entities.ModuleProgressEntity
+import com.sampleapp.database.entities.QuizResultEntity
+import com.sampleapp.database.entities.QuestionHistoryConverter
 
 @Database(
     entities = [
-        ModuleProgressEntity::class
+        ModuleProgressEntity::class,
+        QuizResultEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
+@TypeConverters(QuestionHistoryConverter::class)
 abstract class QuizDatabase : RoomDatabase() {
     
     abstract fun moduleProgressDao(): ModuleProgressDao
+    abstract fun quizResultDao(): QuizResultDao
     
     companion object {
         @Volatile
@@ -28,7 +35,9 @@ abstract class QuizDatabase : RoomDatabase() {
                     context.applicationContext,
                     QuizDatabase::class.java,
                     "quiz_database"
-                ).build()
+                )
+                .fallbackToDestructiveMigration()
+                .build()
                 INSTANCE = instance
                 instance
             }

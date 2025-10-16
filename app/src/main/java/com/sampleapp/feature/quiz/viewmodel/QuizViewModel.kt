@@ -15,6 +15,7 @@ import javax.inject.Inject
 
 class QuizViewModel @Inject constructor(
     private val repository: QuizRepository,
+    private val quizResultRepository: com.sampleapp.feature.quiz.repository.QuizResultRepository,
     private val context: Context
 ) : ViewModel() {
 
@@ -28,8 +29,11 @@ class QuizViewModel @Inject constructor(
     private var currentStreak = 0
     private var longestStreak = 0
     private val questionHistory = mutableListOf<QuestionState>()
+    private var isReviewMode = false
+    private var savedQuestionHistory: List<QuestionState> = emptyList()
 
     fun loadQuestions(questionsUrl: String) {
+        isReviewMode = false
         viewModelScope.launch {
             _uiState.value = QuizUiState.Loading
             when (val result = repository.getQuestions(questionsUrl)) {
@@ -38,12 +42,46 @@ class QuizViewModel @Inject constructor(
                     if (questions.isNotEmpty()) {
                         showNextQuestion()
                     } else {
-                        _uiState.value = QuizUiState.Error(context.getString(R.string.no_questions_available))
+                        _uiState.value =
+                            QuizUiState.Error(context.getString(R.string.no_questions_available))
                     }
                 }
 
                 is Resource.Error -> {
-                    _uiState.value = QuizUiState.Error(result.message ?: context.getString(R.string.some_error))
+                    _uiState.value =
+                        QuizUiState.Error(result.message ?: context.getString(R.string.some_error))
+                }
+
+                is Resource.Loading -> {
+                    // Already showing loading
+                }
+            }
+        }
+    }
+
+    fun loadQuestionsForReview(questionsUrl: String, moduleId: String) {
+        isReviewMode = true
+        viewModelScope.launch {
+            _uiState.value = QuizUiState.Loading
+            when (val result = repository.getQuestions(questionsUrl)) {
+                is Resource.Success -> {
+                    questions = result.data ?: emptyList()
+
+                    val savedResult = quizResultRepository.getQuizResult(moduleId)
+                    if (savedResult != null && questions.isNotEmpty()) {
+                        savedQuestionHistory = savedResult.questionHistory
+                        correctAnswersCount = savedResult.correctAnswers
+                        longestStreak = savedResult.longestStreak
+                        showNextQuestion()
+                    } else {
+                        _uiState.value =
+                            QuizUiState.Error(context.getString(R.string.no_questions_available))
+                    }
+                }
+
+                is Resource.Error -> {
+                    _uiState.value =
+                        QuizUiState.Error(result.message ?: context.getString(R.string.some_error))
                 }
 
                 is Resource.Loading -> {
@@ -85,10 +123,11 @@ class QuizViewModel @Inject constructor(
                 isStreakBadgeActive = currentStreak >= 3
             )
 
-            // Auto-advance after 2 seconds
-            viewModelScope.launch {
-                delay(2000)
-                moveToNextQuestion()
+            if (!isReviewMode) {
+                viewModelScope.launch {
+                    delay(2000)
+                    moveToNextQuestion()
+                }
             }
         }
     }
@@ -120,11 +159,24 @@ class QuizViewModel @Inject constructor(
 
     private fun showNextQuestion() {
         val question = questions[currentQuestionIndex]
-        val questionState = QuestionState(
-            question = question,
-            questionNumber = currentQuestionIndex + 1,
-            totalQuestions = questions.size
-        )
+        val questionState = if (isReviewMode && currentQuestionIndex < savedQuestionHistory.size) {
+            val savedQuestion = savedQuestionHistory[currentQuestionIndex]
+            QuestionState(
+                question = question,
+                questionNumber = currentQuestionIndex + 1,
+                totalQuestions = questions.size,
+                selectedAnswerIndex = savedQuestion.selectedAnswerIndex,
+                isAnswered = true,
+                isCorrect = savedQuestion.isCorrect,
+                isSkipped = savedQuestion.isSkipped
+            )
+        } else {
+            QuestionState(
+                question = question,
+                questionNumber = currentQuestionIndex + 1,
+                totalQuestions = questions.size
+            )
+        }
 
         _uiState.value = QuizUiState.QuizInProgress(
             currentQuestion = questionState,
@@ -134,6 +186,12 @@ class QuizViewModel @Inject constructor(
             skippedQuestions = skippedQuestionsCount,
             isStreakBadgeActive = currentStreak >= 3
         )
+    }
+
+    fun nextQuestion() {
+        if (isReviewMode) {
+            moveToNextQuestion()
+        }
     }
 
     private fun showResults() {

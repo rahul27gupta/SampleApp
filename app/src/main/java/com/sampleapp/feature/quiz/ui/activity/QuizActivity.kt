@@ -24,15 +24,18 @@ class QuizActivity : AppCompatActivity() {
     private lateinit var binding: ActivityQuizBinding
     private var canNavigate = true
     private var currentModuleId: String? = null
+    private var isReviewMode = false
 
     companion object {
         private const val ANIMATION_DURATION = 300L
         private const val OPTION_ANIMATION_DELAY = 50L
         private const val MODULE = "module"
+        private const val IS_REVIEW_MODE = "is_review_mode"
 
-        fun start(context: Context, module: Module) {
+        fun start(context: Context, module: Module, isReviewMode: Boolean = false) {
             val intent = Intent(context, QuizActivity::class.java).apply {
                 putExtra(MODULE, module)
+                putExtra(IS_REVIEW_MODE, isReviewMode)
             }
             context.startActivity(intent)
         }
@@ -57,23 +60,34 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun getBundleData() {
+        isReviewMode = intent.getBooleanExtra(IS_REVIEW_MODE, false)
         intent.getParcelableExtra<Module?>(MODULE)?.let { module ->
             currentModuleId = module.id
             module.questionsUrl?.let { questionsUrl ->
-                viewModel.loadQuestions(questionsUrl)
+                if (isReviewMode) {
+                    viewModel.loadQuestionsForReview(questionsUrl, module.id ?: "")
+                } else {
+                    viewModel.loadQuestions(questionsUrl)
+                }
             }
         }
     }
 
     private fun setupClickListeners() {
-        binding.optionsContainer.btnOption1.setOnClickListener { selectOption(index = 0) }
-        binding.optionsContainer.btnOption2.setOnClickListener { selectOption(index = 1) }
-        binding.optionsContainer.btnOption3.setOnClickListener { selectOption(index = 2) }
-        binding.optionsContainer.btnOption4.setOnClickListener { selectOption(index = 3) }
-        binding.btnSkip.setOnClickListener { viewModel.skipQuestion() }
+        if (!isReviewMode) {
+            binding.optionsContainer.btnOption1.setOnClickListener { selectOption(index = 0) }
+            binding.optionsContainer.btnOption2.setOnClickListener { selectOption(index = 1) }
+            binding.optionsContainer.btnOption3.setOnClickListener { selectOption(index = 2) }
+            binding.optionsContainer.btnOption4.setOnClickListener { selectOption(index = 3) }
+            binding.btnSkip.setOnClickListener { viewModel.skipQuestion() }
+        } else {
+            binding.btnSkip.text = getString(R.string.next)
+            binding.btnSkip.setOnClickListener { viewModel.nextQuestion() }
+        }
     }
 
     private fun selectOption(index: Int) {
+        if (isReviewMode) return
         if (!canNavigate) return
         canNavigate = false
         viewModel.selectAnswer(index)
@@ -99,22 +113,30 @@ class QuizActivity : AppCompatActivity() {
         binding.progressBar.visibility = View.GONE
         binding.quizContainer.visibility = View.VISIBLE
         val question = state.currentQuestion
-        canNavigate = !question.isAnswered
+        canNavigate = !question.isAnswered && !isReviewMode
         updateQuestionNumber(question)
         updateProgressIndicators(question.questionNumber)
-        updateStreakNotification(state.currentStreak)
+        if (!isReviewMode) {
+            updateStreakNotification(state.currentStreak)
+        } else {
+            binding.streakNotificationCard.root.visibility = View.GONE
+        }
         updateQuestionText(question.question.questionText)
         updateOptions(state)
     }
 
     private fun handleQuizCompleted(state: QuizUiState.QuizCompleted) {
-        val module = intent.getParcelableExtra<Module?>(MODULE)
-        if (module != null) {
-            ResultActivity.start(this, state.result, module)
+        if (isReviewMode) {
             finish()
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         } else {
-            finish()
+            val module = intent.getParcelableExtra<Module?>(MODULE)
+            if (module != null) {
+                ResultActivity.start(this, state.result, module)
+                finish()
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            } else {
+                finish()
+            }
         }
     }
 
@@ -186,11 +208,11 @@ class QuizActivity : AppCompatActivity() {
         button.apply {
             text = optionText
             visibility = View.VISIBLE
-            isEnabled = !question.isAnswered
+            isEnabled = !question.isAnswered && !isReviewMode
 
             resetOptionStyle()
 
-            if (question.isAnswered) {
+            if (question.isAnswered || isReviewMode) {
                 applyAnswerStyle(index, question)
             }
         }

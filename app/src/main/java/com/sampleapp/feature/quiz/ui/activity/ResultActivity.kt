@@ -21,6 +21,9 @@ class ResultActivity : AppCompatActivity() {
     @Inject
     lateinit var moduleProgressRepository: ModuleProgressRepository
 
+    @Inject
+    lateinit var quizResultRepository: com.sampleapp.feature.quiz.repository.QuizResultRepository
+
     private lateinit var binding: ActivityResultBinding
     private lateinit var result: QuizResult
     private lateinit var module: Module
@@ -94,7 +97,9 @@ class ResultActivity : AppCompatActivity() {
             val correctAnswers = result.score.split("/").firstOrNull()?.toIntOrNull() ?: 0
             android.util.Log.d("ResultActivity", "Saving progress for module ${module.id} with score $correctAnswers")
             moduleProgressRepository.completeModule(module.id ?: "", correctAnswers)
-            android.util.Log.d("ResultActivity", "Progress saved successfully")
+            // Save quiz result for review
+            quizResultRepository.saveQuizResult(module.id ?: "", result)
+            android.util.Log.d("ResultActivity", "Progress and quiz result saved successfully")
             runOnUiThread {
                 val intent = Intent(this@ResultActivity, ModulesActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

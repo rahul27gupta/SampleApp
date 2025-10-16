@@ -64,7 +64,6 @@ class ModulesActivity : AppCompatActivity(), ModulesListener {
             when (modulesResult) {
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
-                    // Handle error - could show error message
                 }
 
                 is Resource.Loading -> {
@@ -94,10 +93,10 @@ class ModulesActivity : AppCompatActivity(), ModulesListener {
     }
 
     override fun onStartClick(data: Module?) {
-        data?.let { QuizActivity.start(binding.root.context, it) }
+        data?.let { QuizActivity.start(binding.root.context, it, isReviewMode = false) }
     }
 
     override fun onReviewClick(data: Module?) {
-        // TODO("Not yet implemented")
+        data?.let { QuizActivity.start(binding.root.context, it, isReviewMode = true) }
     }
 }

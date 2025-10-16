@@ -11,6 +11,7 @@
     <string name="streak_notification">%d questions streak achieved !!</string>
     <string name="error_message">Error: %s</string>
     <string name="skip">Skip</string>
+    <string name="next">Next</string>
 
     <!-- Result Activity -->
     <string name="close">Close</string>

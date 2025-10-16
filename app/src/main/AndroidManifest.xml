@@ -32,12 +32,10 @@
         <activity
             android:name=".feature.quiz.ui.activity.QuizActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.SampleApp" />
         <activity
             android:name=".feature.quiz.ui.activity.ResultActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.SampleApp" />
     </application>
 
