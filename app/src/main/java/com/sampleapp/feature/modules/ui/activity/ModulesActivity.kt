@@ -18,6 +18,9 @@ import com.sampleapp.feature.modules.ui.adapter.ModulesListener
 import com.sampleapp.feature.modules.viewModel.ModulesViewModel
 import com.sampleapp.feature.quiz.ui.activity.QuizActivity
 import com.sampleapp.network.Resource
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ModulesActivity : AppCompatActivity(), ModulesListener {
     private lateinit var binding: ActivityModulesBinding
@@ -57,19 +60,24 @@ class ModulesActivity : AppCompatActivity(), ModulesListener {
     }
 
     private fun setupObserver() {
-        viewModel.modulesWithProgress.observe(this) { modulesResult ->
+        viewModel.observeModules().observe(this) { modulesResult ->
             when (modulesResult) {
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
                     // Handle error - could show error message
                 }
+
                 is Resource.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                 }
+
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
-                    val modulesWithProgress = modulesResult.data ?: emptyList()
-                    moduleAdapter.updateModules(modulesWithProgress)
+                    val modules = modulesResult.data ?: emptyList()
+                    CoroutineScope(Dispatchers.Main).launch {
+                        val modulesWithProgress = viewModel.combineModulesWithProgress(modules)
+                        moduleAdapter.updateModules(modulesWithProgress)
+                    }
                 }
             }
         }
@@ -77,7 +85,12 @@ class ModulesActivity : AppCompatActivity(), ModulesListener {
 
     private fun setupView() {
         binding.appBar.tvTitle.text = getString(R.string.modules)
-        viewModel.loadModulesWithProgress()
+        viewModel.getModules()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getModules()
     }
 
     override fun onStartClick(data: Module?) {
