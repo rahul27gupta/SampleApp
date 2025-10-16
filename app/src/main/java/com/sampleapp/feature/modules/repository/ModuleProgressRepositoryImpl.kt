@@ -18,10 +18,10 @@ class ModuleProgressRepositoryImpl @Inject constructor(
             val moduleProgress = ModuleProgressEntity(
                 moduleId = module.id ?: "",
                 moduleTitle = module.title ?: "",
-                isCompleted = false,
                 totalQuestions = 10, // Fixed 10 questions per module
                 correctAnswers = 0,
-                lastAttemptDate = 0L,
+                isCompleted = false,
+                lastAttemptDate = System.currentTimeMillis(),
                 currentQuestionIndex = 0
             )
             moduleProgressDao.insertOrUpdateModuleProgress(moduleProgress)
@@ -29,12 +29,23 @@ class ModuleProgressRepositoryImpl @Inject constructor(
     }
     
     override suspend fun completeModule(moduleId: String, correctAnswers: Int) {
-        moduleProgressDao.updateModuleCompletion(
-            moduleId = moduleId,
-            isCompleted = true,
+        val existingProgress = moduleProgressDao.getModuleProgress(moduleId)
+        val totalQuestions = existingProgress?.totalQuestions ?: 10
+        val moduleTitle = existingProgress?.moduleTitle ?: ""
+        val updatedProgress = existingProgress?.copy(
             correctAnswers = correctAnswers,
+            isCompleted = true,
             lastAttemptDate = System.currentTimeMillis()
+        ) ?: ModuleProgressEntity(
+            moduleId = moduleId,
+            moduleTitle = moduleTitle,
+            totalQuestions = totalQuestions,
+            correctAnswers = correctAnswers,
+            isCompleted = true,
+            lastAttemptDate = System.currentTimeMillis(),
+            currentQuestionIndex = 0
         )
+        moduleProgressDao.insertOrUpdateModuleProgress(updatedProgress)
     }
     
     override suspend fun getModuleProgress(moduleId: String): ModuleProgressEntity? {

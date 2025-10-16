@@ -28,8 +28,11 @@ class ModulesViewModel @Inject constructor(
 
     suspend fun combineModulesWithProgress(modules: List<Module>): List<ModuleWithProgress> {
         val progressMap = getAllModuleProgress()
+        android.util.Log.d("ModulesViewModel", "Progress map size: ${progressMap.size}")
+        android.util.Log.d("ModulesViewModel", "Progress map keys: ${progressMap.keys}")
         return modules.map { module ->
             val progress = progressMap[module.id]
+            android.util.Log.d("ModulesViewModel", "Module ${module.id}: progress = $progress")
             ModuleWithProgress(
                 module = module,
                 isCompleted = progress?.isCompleted ?: false,
@@ -41,6 +44,8 @@ class ModulesViewModel @Inject constructor(
 
     private suspend fun getAllModuleProgress(): Map<String, ModuleProgressEntity> {
         val progressList = moduleProgressRepository.getAllModuleProgress().first()
+        android.util.Log.d("ModulesViewModel", "Retrieved progress list size: ${progressList.size}")
+        android.util.Log.d("ModulesViewModel", "Progress list: $progressList")
         return progressList.associateBy { it.moduleId }
     }
 }
