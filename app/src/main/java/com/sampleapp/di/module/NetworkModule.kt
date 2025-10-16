@@ -1,5 +1,6 @@
 package com.sampleapp.di.module
 
+import com.sampleapp.network.ApiConstants
 import com.sampleapp.network.ApiServices
 import dagger.Module
 import dagger.Provides
@@ -11,8 +12,6 @@ import javax.inject.Singleton
 
 @Module
 object NetworkModule {
-
-    private const val BASE_URL = "https://gist.githubusercontent.com/dr-samrat/53846277a8fcb034e482906ccc0d12b2/"
 
     @Provides
     @Singleton
@@ -28,7 +27,7 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(ApiConstants.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

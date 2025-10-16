@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.dagger)
+    implementation(libs.androidx.activity)
     ksp(libs.dagger.compiler)
     implementation(libs.glide)
     ksp(libs.glide.compiler)

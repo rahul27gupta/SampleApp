@@ -1,0 +1,819 @@
+Index: ../ZobazeAssignment/app/src/main/res/layout/activity_home.xml
+===================================================================
+diff --git a/../ZobazeAssignment/app/src/main/res/layout/activity_home.xml b/../ZobazeAssignment/app/src/main/res/layout/activity_home.xml
+deleted file mode 100644
+--- a/../ZobazeAssignment/app/src/main/res/layout/activity_home.xml	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,36 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    xmlns:tools="http://schemas.android.com/tools">
+-
+-    <data>
+-
+-    </data>
+-
+-    <androidx.constraintlayout.widget.ConstraintLayout
+-        android:id="@+id/main"
+-        android:layout_width="match_parent"
+-        android:layout_height="match_parent"
+-        android:background="@color/color_F5F5F5"
+-        tools:context=".ui.main.MainFragment">
+-
+-        <FrameLayout
+-            android:id="@+id/flContainer"
+-            android:layout_width="match_parent"
+-            android:layout_height="0dp"
+-            app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
+-            app:layout_constraintEnd_toEndOf="parent"
+-            app:layout_constraintStart_toStartOf="parent"
+-            app:layout_constraintTop_toTopOf="parent" />
+-
+-        <include
+-            android:id="@+id/bottomNavigation"
+-            layout="@layout/bottom_navigation"
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            app:layout_constraintBottom_toBottomOf="parent"
+-            app:layout_constraintEnd_toEndOf="parent"
+-            app:layout_constraintStart_toStartOf="parent" />
+-
+-    </androidx.constraintlayout.widget.ConstraintLayout>
+-</layout>
+\ No newline at end of file
+Index: ../LearningApp/.idea/AndroidProjectSystem.xml
+===================================================================
+diff --git a/../LearningApp/.idea/AndroidProjectSystem.xml b/../LearningApp/.idea/AndroidProjectSystem.xml
+deleted file mode 100644
+--- a/../LearningApp/.idea/AndroidProjectSystem.xml	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,6 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="AndroidProjectSystem">
+-    <option name="providerId" value="com.android.tools.idea.GradleProjectSystem" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: ../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/network/ApiServices.kt
+===================================================================
+diff --git a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/network/ApiServices.kt b/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/network/ApiServices.kt
+deleted file mode 100644
+--- a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/network/ApiServices.kt	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,11 +0,0 @@
+-package com.zobaze.assignment.network
+-
+-import com.zobaze.assignment.feature.home.models.Headline
+-import retrofit2.Response
+-import retrofit2.http.GET
+-
+-interface ApiServices {
+-
+-    @GET("top-headlines")
+-    suspend fun getTopHeadlines(): Response<ArrayList<Headline>>
+-}
+\ No newline at end of file
+Index: ../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/di/component/AppComponent.kt
+===================================================================
+diff --git a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/di/component/AppComponent.kt b/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/di/component/AppComponent.kt
+deleted file mode 100644
+--- a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/di/component/AppComponent.kt	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,20 +0,0 @@
+-package com.zobaze.assignment.di.component
+-
+-import com.zobaze.assignment.di.module.DataSourceModule
+-import com.zobaze.assignment.di.module.NetworkModule
+-import com.zobaze.assignment.di.module.RepositoryModule
+-import com.zobaze.assignment.feature.home.ui.activity.HomeActivity
+-import com.zobaze.assignment.feature.home.viewModel.HomeViewModel
+-import com.zobaze.assignment.feature.addExpense.ui.activity.AddExpenseActivity
+-import com.zobaze.assignment.feature.addExpense.viewModel.AddExpenseViewModel
+-import dagger.Component
+-import javax.inject.Singleton
+-
+-@Singleton
+-@Component(modules = [NetworkModule::class, DataSourceModule::class, RepositoryModule::class])
+-interface AppComponent {
+-    fun inject(activity: HomeActivity)
+-    fun inject(activity: AddExpenseActivity)
+-    fun injectHomeViewModel(): HomeViewModel
+-    fun injectAddExpenseViewModel(): AddExpenseViewModel
+-}
+\ No newline at end of file
+Index: ../LearningApp/.idea/appInsightsSettings.xml
+===================================================================
+diff --git a/../LearningApp/.idea/appInsightsSettings.xml b/../LearningApp/.idea/appInsightsSettings.xml
+deleted file mode 100644
+--- a/../LearningApp/.idea/appInsightsSettings.xml	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,40 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="AppInsightsSettings">
+-    <option name="tabSettings">
+-      <map>
+-        <entry key="Android Vitals">
+-          <value>
+-            <InsightsFilterSettings>
+-              <option name="connection">
+-                <ConnectionSetting>
+-                  <option name="appId" value="com.wheelseye.consigner" />
+-                </ConnectionSetting>
+-              </option>
+-              <option name="signal" value="SIGNAL_UNSPECIFIED" />
+-              <option name="timeIntervalDays" value="SEVEN_DAYS" />
+-              <option name="visibilityType" value="ALL" />
+-            </InsightsFilterSettings>
+-          </value>
+-        </entry>
+-        <entry key="Firebase Crashlytics">
+-          <value>
+-            <InsightsFilterSettings>
+-              <option name="connection">
+-                <ConnectionSetting>
+-                  <option name="appId" value="PLACEHOLDER" />
+-                  <option name="mobileSdkAppId" value="" />
+-                  <option name="projectId" value="" />
+-                  <option name="projectNumber" value="" />
+-                </ConnectionSetting>
+-              </option>
+-              <option name="signal" value="SIGNAL_UNSPECIFIED" />
+-              <option name="timeIntervalDays" value="THIRTY_DAYS" />
+-              <option name="visibilityType" value="ALL" />
+-            </InsightsFilterSettings>
+-          </value>
+-        </entry>
+-      </map>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: ../LearningApp/.idea/compiler.xml
+===================================================================
+diff --git a/../LearningApp/.idea/compiler.xml b/../LearningApp/.idea/compiler.xml
+deleted file mode 100644
+--- a/../LearningApp/.idea/compiler.xml	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,6 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="CompilerConfiguration">
+-    <bytecodeTargetLevel target="21" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: ../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/di/module/DataSourceModule.kt
+===================================================================
+diff --git a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/di/module/DataSourceModule.kt b/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/di/module/DataSourceModule.kt
+deleted file mode 100644
+--- a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/di/module/DataSourceModule.kt	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,15 +0,0 @@
+-package com.zobaze.assignment.di.module
+-
+-import com.zobaze.assignment.feature.home.dataSource.HomeDataSource
+-import com.zobaze.assignment.feature.home.dataSource.HomeDataSourceImpl
+-import dagger.Binds
+-import dagger.Module
+-import javax.inject.Singleton
+-
+-@Module
+-abstract class DataSourceModule {
+-
+-    @Binds
+-    @Singleton
+-    abstract fun bindHomeDataSource(homeDataSourceImpl: HomeDataSourceImpl): HomeDataSource
+-}
+\ No newline at end of file
+Index: ../ZobazeAssignment/app/src/main/res/layout/fragment_home.xml
+===================================================================
+diff --git a/../ZobazeAssignment/app/src/main/res/layout/fragment_home.xml b/../ZobazeAssignment/app/src/main/res/layout/fragment_home.xml
+deleted file mode 100644
+--- a/../ZobazeAssignment/app/src/main/res/layout/fragment_home.xml	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,25 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    xmlns:tools="http://schemas.android.com/tools">
+-
+-    <data>
+-
+-    </data>
+-
+-    <androidx.constraintlayout.widget.ConstraintLayout
+-        android:id="@+id/main"
+-        android:layout_width="match_parent"
+-        android:layout_height="match_parent"
+-        tools:context=".ui.main.MainFragment">
+-
+-        <androidx.recyclerview.widget.RecyclerView
+-            android:id="@+id/rvHeadlines"
+-            android:layout_width="match_parent"
+-            android:layout_height="match_parent"
+-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+-            tools:itemCount="6"
+-            tools:listitem="@layout/item_headline" />
+-
+-    </androidx.constraintlayout.widget.ConstraintLayout>
+-</layout>
+\ No newline at end of file
+Index: ../LearningApp/.idea/gradle.xml
+===================================================================
+diff --git a/../LearningApp/.idea/gradle.xml b/../LearningApp/.idea/gradle.xml
+deleted file mode 100644
+--- a/../LearningApp/.idea/gradle.xml	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,18 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="GradleSettings">
+-    <option name="linkedExternalProjectsSettings">
+-      <GradleProjectSettings>
+-        <option name="testRunner" value="CHOOSE_PER_TEST" />
+-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+-        <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
+-        <option name="modules">
+-          <set>
+-            <option value="$PROJECT_DIR$" />
+-            <option value="$PROJECT_DIR$/app" />
+-          </set>
+-        </option>
+-      </GradleProjectSettings>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: ../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/models/Headline.kt
+===================================================================
+diff --git a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/models/Headline.kt b/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/models/Headline.kt
+deleted file mode 100644
+--- a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/models/Headline.kt	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,14 +0,0 @@
+-package com.zobaze.assignment.feature.home.models
+-
+-import com.google.gson.annotations.SerializedName
+-
+-data class Headline(
+-    @SerializedName("id")
+-    val id: Int? = null,
+-    @SerializedName("title")
+-    val title: String? = null,
+-    @SerializedName("description")
+-    val description: String? = null,
+-    @SerializedName("icon")
+-    val icon: String? = null
+-)
+Index: ../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/ui/adapter/HeadlinesAdaptor.kt
+===================================================================
+diff --git a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/ui/adapter/HeadlinesAdaptor.kt b/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/ui/adapter/HeadlinesAdaptor.kt
+deleted file mode 100644
+--- a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/ui/adapter/HeadlinesAdaptor.kt	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,30 +0,0 @@
+-package com.zobaze.assignment.feature.home.ui.adapter
+-
+-import android.view.LayoutInflater
+-import android.view.ViewGroup
+-import androidx.recyclerview.widget.RecyclerView
+-import com.zobaze.assignment.databinding.ItemHeadlineBinding
+-import com.zobaze.assignment.feature.home.models.Headline
+-
+-class HeadlinesAdaptor(private val list: ArrayList<Headline>) :
+-    RecyclerView.Adapter<HeadlineViewHolder>() {
+-
+-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeadlineViewHolder {
+-        val inflate =
+-            ItemHeadlineBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+-        return HeadlineViewHolder(inflate)
+-
+-    }
+-
+-    override fun onBindViewHolder(holder: HeadlineViewHolder, position: Int) {
+-        holder.apply { bindData(list[adapterPosition]) }
+-    }
+-
+-    override fun getItemCount(): Int = list.size
+-}
+-
+-
+-class HeadlineViewHolder(private val itemBinding: ItemHeadlineBinding) :
+-    RecyclerView.ViewHolder(itemBinding.root) {
+-    fun bindData(item: Headline) {}
+-}
+\ No newline at end of file
+Index: ../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/ui/activity/HomeActivity.kt
+===================================================================
+diff --git a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/ui/activity/HomeActivity.kt b/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/ui/activity/HomeActivity.kt
+deleted file mode 100644
+--- a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/ui/activity/HomeActivity.kt	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,92 +0,0 @@
+-package com.zobaze.assignment.feature.home.ui.activity
+-
+-import android.os.Bundle
+-import androidx.appcompat.app.AppCompatActivity
+-import androidx.databinding.DataBindingUtil
+-import androidx.fragment.app.Fragment
+-import com.zobaze.assignment.ZobazeApp
+-import com.zobaze.assignment.R
+-import com.zobaze.assignment.databinding.ActivityHomeBinding
+-import com.zobaze.assignment.feature.expense.ui.fragment.ExpenseFragment
+-import com.zobaze.assignment.feature.home.viewModel.HomeViewModel
+-import com.zobaze.assignment.feature.reports.ui.fragment.ReportsFragment
+-import com.zobaze.assignment.feature.setting.ui.fragment.SettingFragment
+-
+-class HomeActivity : AppCompatActivity() {
+-    private lateinit var binding: ActivityHomeBinding
+-    lateinit var viewModel: HomeViewModel
+-
+-    override fun onCreate(savedInstanceState: Bundle?) {
+-        super.onCreate(savedInstanceState)
+-        val appComponent = (application as ZobazeApp).appComponent
+-        appComponent.inject(this)
+-        viewModel = appComponent.injectHomeViewModel()
+-        binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
+-        setupView()
+-        setupObserver()
+-    }
+-
+-    private fun setupView() {
+-        inflateFragment(fragment = ExpenseFragment())
+-        setupBottomNavigation()
+-        updateBottomNavSelection(selectedTab = getString(R.string.nav_expenses))
+-    }
+-
+-    private fun setupBottomNavigation() {
+-        binding.bottomNavigation.llExpenses.setOnClickListener {
+-            inflateFragment(fragment = ExpenseFragment())
+-            updateBottomNavSelection(selectedTab = getString(R.string.nav_expenses))
+-        }
+-
+-        binding.bottomNavigation.llReports.setOnClickListener {
+-            inflateFragment(fragment = ReportsFragment())
+-            updateBottomNavSelection(selectedTab = getString(R.string.nav_reports))
+-        }
+-
+-        binding.bottomNavigation.llSettings.setOnClickListener {
+-            inflateFragment(fragment = SettingFragment())
+-            updateBottomNavSelection(selectedTab = getString(R.string.nav_settings))
+-        }
+-    }
+-
+-    private fun updateBottomNavSelection(selectedTab: String) {
+-        val selectedColor = getColor(R.color.color_212121)
+-        val unselectedColor = getColor(R.color.color_757575)
+-
+-        // Reset all tabs to unselected state using data binding
+-        binding.bottomNavigation.ivExpenses.setColorFilter(unselectedColor)
+-        binding.bottomNavigation.tvExpenses.setTextColor(unselectedColor)
+-        binding.bottomNavigation.ivReports.setColorFilter(unselectedColor)
+-        binding.bottomNavigation.tvReports.setTextColor(unselectedColor)
+-        binding.bottomNavigation.ivSettings.setColorFilter(unselectedColor)
+-        binding.bottomNavigation.tvSettings.setTextColor(unselectedColor)
+-
+-        // Set selected tab using data binding
+-        when (selectedTab) {
+-            getString(R.string.nav_expenses) -> {
+-                binding.bottomNavigation.ivExpenses.setColorFilter(selectedColor)
+-                binding.bottomNavigation.tvExpenses.setTextColor(selectedColor)
+-            }
+-
+-            getString(R.string.nav_reports) -> {
+-                binding.bottomNavigation.ivReports.setColorFilter(selectedColor)
+-                binding.bottomNavigation.tvReports.setTextColor(selectedColor)
+-            }
+-
+-            getString(R.string.nav_settings) -> {
+-                binding.bottomNavigation.ivSettings.setColorFilter(selectedColor)
+-                binding.bottomNavigation.tvSettings.setTextColor(selectedColor)
+-            }
+-        }
+-    }
+-
+-    private fun setupObserver() {}
+-
+-    private fun inflateFragment(fragment: Fragment) {
+-        supportFragmentManager.beginTransaction().apply {
+-            replace(R.id.flContainer, fragment)
+-            addToBackStack(null)
+-            commit()
+-        }
+-    }
+-}
+\ No newline at end of file
+Index: ../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/dataSource/HomeDataSource.kt
+===================================================================
+diff --git a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/dataSource/HomeDataSource.kt b/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/dataSource/HomeDataSource.kt
+deleted file mode 100644
+--- a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/dataSource/HomeDataSource.kt	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,11 +0,0 @@
+-package com.zobaze.assignment.feature.home.dataSource
+-
+-import androidx.lifecycle.LiveData
+-import com.zobaze.assignment.feature.home.models.Headline
+-import com.zobaze.assignment.network.Resource
+-
+-interface HomeDataSource {
+-
+-    fun getTopHeadlines()
+-    fun observerTopHeadlines(): LiveData<Resource<ArrayList<Headline>>>
+-}
+\ No newline at end of file
+Index: ../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/dataSource/HomeDataSourceImpl.kt
+===================================================================
+diff --git a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/dataSource/HomeDataSourceImpl.kt b/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/dataSource/HomeDataSourceImpl.kt
+deleted file mode 100644
+--- a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/dataSource/HomeDataSourceImpl.kt	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,34 +0,0 @@
+-package com.zobaze.assignment.feature.home.dataSource
+-
+-import androidx.lifecycle.LiveData
+-import androidx.lifecycle.MutableLiveData
+-import com.zobaze.assignment.feature.home.models.Headline
+-import com.zobaze.assignment.network.ApiServices
+-import com.zobaze.assignment.network.Resource
+-import kotlinx.coroutines.CoroutineScope
+-import kotlinx.coroutines.Dispatchers
+-import kotlinx.coroutines.launch
+-import javax.inject.Inject
+-
+-class HomeDataSourceImpl @Inject constructor(
+-    private val apiServices: ApiServices
+-) : HomeDataSource {
+-
+-    private val _topHeadlines = MutableLiveData<Resource<ArrayList<Headline>>>()
+-    override fun observerTopHeadlines(): LiveData<Resource<ArrayList<Headline>>> = _topHeadlines
+-    override fun getTopHeadlines() {
+-        CoroutineScope(Dispatchers.IO).launch {
+-            try {
+-                val response = apiServices.getTopHeadlines()
+-                if (response.isSuccessful) {
+-                    _topHeadlines.postValue(Resource.Success(response.body()!!))
+-                } else {
+-                    _topHeadlines.postValue(Resource.Error(response.body()!!, response.message()))
+-                }
+-
+-            } catch (e: Exception) {
+-                _topHeadlines.postValue(Resource.Error(null, e.message ?: "Something went wrong"))
+-            }
+-        }
+-    }
+-}
+\ No newline at end of file
+Index: ../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/ui/fragment/HomeFragment.kt
+===================================================================
+diff --git a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/ui/fragment/HomeFragment.kt b/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/ui/fragment/HomeFragment.kt
+deleted file mode 100644
+--- a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/ui/fragment/HomeFragment.kt	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,56 +0,0 @@
+-package com.zobaze.assignment.feature.home.ui.fragment
+-
+-import android.os.Bundle
+-import android.view.LayoutInflater
+-import android.view.View
+-import android.view.ViewGroup
+-import androidx.fragment.app.Fragment
+-import com.zobaze.assignment.databinding.FragmentHomeBinding
+-import com.zobaze.assignment.feature.home.ui.activity.HomeActivity
+-import com.zobaze.assignment.feature.home.ui.adapter.HeadlinesAdaptor
+-import com.zobaze.assignment.feature.home.viewModel.HomeViewModel
+-import com.zobaze.assignment.network.Resource
+-
+-class HomeFragment : Fragment() {
+-    private lateinit var binding: FragmentHomeBinding
+-    private lateinit var viewModel: HomeViewModel
+-
+-    override fun onCreateView(
+-        inflater: LayoutInflater,
+-        container: ViewGroup?,
+-        savedInstanceState: Bundle?
+-    ): View? {
+-        super.onCreateView(inflater, container, savedInstanceState)
+-        binding = FragmentHomeBinding.inflate(inflater, container, false)
+-        return binding.root
+-    }
+-
+-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+-        super.onViewCreated(view, savedInstanceState)
+-        viewModel = (requireActivity() as HomeActivity).viewModel
+-        setupView()
+-        setupObserver()
+-    }
+-
+-    private fun setupObserver() {
+-        viewModel.observerTopHeadlines().observe(viewLifecycleOwner) {
+-            when (it) {
+-                is Resource.Success -> {
+-                    binding.rvHeadlines.adapter = HeadlinesAdaptor(it.data!!)
+-                }
+-
+-                is Resource.Loading -> {
+-                    // Show Loader Here
+-                }
+-
+-                is Resource.Error -> {
+-                    // Show Error Here
+-                }
+-            }
+-        }
+-    }
+-
+-    private fun setupView() {
+-        viewModel.getTopHeadlines()
+-    }
+-}
+\ No newline at end of file
+Index: ../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/repository/HomeRepository.kt
+===================================================================
+diff --git a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/repository/HomeRepository.kt b/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/repository/HomeRepository.kt
+deleted file mode 100644
+--- a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/repository/HomeRepository.kt	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,11 +0,0 @@
+-package com.zobaze.assignment.feature.home.repository
+-
+-import androidx.lifecycle.LiveData
+-import com.zobaze.assignment.feature.home.models.Headline
+-import com.zobaze.assignment.network.Resource
+-
+-interface HomeRepository {
+-
+-    fun getTopHeadlines()
+-    fun observerTopHeadlines(): LiveData<Resource<ArrayList<Headline>>>
+-}
+\ No newline at end of file
+Index: ../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/repository/HomeRepositoryImpl.kt
+===================================================================
+diff --git a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/repository/HomeRepositoryImpl.kt b/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/repository/HomeRepositoryImpl.kt
+deleted file mode 100644
+--- a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/repository/HomeRepositoryImpl.kt	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,16 +0,0 @@
+-package com.zobaze.assignment.feature.home.repository
+-
+-import androidx.lifecycle.LiveData
+-import com.zobaze.assignment.feature.home.dataSource.HomeDataSource
+-import com.zobaze.assignment.feature.home.models.Headline
+-import com.zobaze.assignment.network.Resource
+-import javax.inject.Inject
+-
+-class HomeRepositoryImpl @Inject constructor(private val dataSource: HomeDataSource) :
+-    HomeRepository {
+-
+-    override fun getTopHeadlines() = dataSource.getTopHeadlines()
+-    override fun observerTopHeadlines(): LiveData<Resource<ArrayList<Headline>>> =
+-        dataSource.observerTopHeadlines()
+-
+-}
+\ No newline at end of file
+Index: ../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/viewModel/HomeViewModel.kt
+===================================================================
+diff --git a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/viewModel/HomeViewModel.kt b/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/viewModel/HomeViewModel.kt
+deleted file mode 100644
+--- a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/feature/home/viewModel/HomeViewModel.kt	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,27 +0,0 @@
+-package com.zobaze.assignment.feature.home.viewModel
+-
+-import androidx.lifecycle.LiveData
+-import androidx.lifecycle.ViewModel
+-import com.zobaze.assignment.feature.home.models.Headline
+-import com.zobaze.assignment.feature.home.repository.HomeRepository
+-import com.zobaze.assignment.feature.expense.models.ExpenseItem
+-import com.zobaze.assignment.feature.expense.models.ExpenseCategory
+-import com.zobaze.assignment.network.Resource
+-import javax.inject.Inject
+-
+-class HomeViewModel @Inject constructor(private val repository: HomeRepository) : ViewModel() {
+-
+-    fun getTopHeadlines() = repository.getTopHeadlines()
+-    fun observerTopHeadlines(): LiveData<Resource<ArrayList<Headline>>> =
+-        repository.observerTopHeadlines()
+-
+-    // Mock data for expenses
+-    fun getMockExpenses(): List<ExpenseItem> {
+-        return listOf(
+-            ExpenseItem(1, "Coffee", 5.50, ExpenseCategory.FOOD, "10:30 AM"),
+-            ExpenseItem(2, "Lunch", 15.75, ExpenseCategory.FOOD, "12:45 PM"),
+-            ExpenseItem(3, "Office Supplies", 32.20, ExpenseCategory.UTILITY, "3:15 PM"),
+-            ExpenseItem(4, "Dinner", 25.00, ExpenseCategory.FOOD, "6:00 PM")
+-        )
+-    }
+-}
+\ No newline at end of file
+Index: ../ZobazeAssignment/app/src/main/res/layout/item_headline.xml
+===================================================================
+diff --git a/../ZobazeAssignment/app/src/main/res/layout/item_headline.xml b/../ZobazeAssignment/app/src/main/res/layout/item_headline.xml
+deleted file mode 100644
+--- a/../ZobazeAssignment/app/src/main/res/layout/item_headline.xml	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,41 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    xmlns:tools="http://schemas.android.com/tools">
+-
+-    <data>
+-
+-    </data>
+-
+-    <androidx.constraintlayout.widget.ConstraintLayout
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:padding="16dp">
+-
+-        <com.google.android.material.imageview.ShapeableImageView
+-            android:id="@+id/ivIcon"
+-            android:layout_width="200dp"
+-            android:layout_height="200dp"
+-            app:layout_constraintEnd_toEndOf="parent"
+-            app:layout_constraintStart_toStartOf="parent"
+-            app:layout_constraintTop_toTopOf="parent"
+-            tools:src="@color/cardview_dark_background" />
+-
+-        <com.google.android.material.textview.MaterialTextView
+-            android:id="@+id/tvTitle"
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:layout_marginTop="8dp"
+-            app:layout_constraintTop_toBottomOf="@+id/ivIcon"
+-            tools:text="Title" />
+-
+-        <com.google.android.material.textview.MaterialTextView
+-            android:id="@+id/tvDesc"
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:layout_marginTop="2dp"
+-            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+-            tools:text="Description" />
+-
+-    </androidx.constraintlayout.widget.ConstraintLayout>
+-</layout>
+\ No newline at end of file
+Index: ../LearningApp/.idea/migrations.xml
+===================================================================
+diff --git a/../LearningApp/.idea/migrations.xml b/../LearningApp/.idea/migrations.xml
+deleted file mode 100644
+--- a/../LearningApp/.idea/migrations.xml	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,10 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="ProjectMigrations">
+-    <option name="MigrateToGradleLocalJavaHome">
+-      <set>
+-        <option value="$PROJECT_DIR$" />
+-      </set>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: ../LearningApp/.idea/misc.xml
+===================================================================
+diff --git a/../LearningApp/.idea/misc.xml b/../LearningApp/.idea/misc.xml
+deleted file mode 100644
+--- a/../LearningApp/.idea/misc.xml	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,5 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="ExternalStorageConfigurationManager" enabled="true" />
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="jbr-21" project-jdk-type="JavaSDK" />
+-</project>
+\ No newline at end of file
+Index: ../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/di/module/NetworkModule.kt
+===================================================================
+diff --git a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/di/module/NetworkModule.kt b/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/di/module/NetworkModule.kt
+deleted file mode 100644
+--- a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/di/module/NetworkModule.kt	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,29 +0,0 @@
+-package com.zobaze.assignment.di.module
+-
+-import com.zobaze.assignment.network.ApiServices
+-import dagger.Module
+-import dagger.Provides
+-import retrofit2.Retrofit
+-import retrofit2.converter.gson.GsonConverterFactory
+-import javax.inject.Singleton
+-
+-@Module
+-object NetworkModule {
+-
+-    private const val BASE_URL = "https://newsapi.org/v2/"
+-
+-    @Provides
+-    @Singleton
+-    fun provideRetrofit(): Retrofit {
+-        return Retrofit.Builder()
+-            .baseUrl(BASE_URL)
+-            .addConverterFactory(GsonConverterFactory.create())
+-            .build()
+-    }
+-
+-    @Provides
+-    @Singleton
+-    fun provideApiServices(retrofit: Retrofit): ApiServices {
+-        return retrofit.create(ApiServices::class.java)
+-    }
+-}
+\ No newline at end of file
+Index: ../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/di/module/RepositoryModule.kt
+===================================================================
+diff --git a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/di/module/RepositoryModule.kt b/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/di/module/RepositoryModule.kt
+deleted file mode 100644
+--- a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/di/module/RepositoryModule.kt	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,15 +0,0 @@
+-package com.zobaze.assignment.di.module
+-
+-import com.zobaze.assignment.feature.home.repository.HomeRepository
+-import com.zobaze.assignment.feature.home.repository.HomeRepositoryImpl
+-import dagger.Binds
+-import dagger.Module
+-import javax.inject.Singleton
+-
+-@Module
+-abstract class RepositoryModule {
+-
+-    @Binds
+-    @Singleton
+-    abstract fun bindHomeRepository(homeRepositoryImpl: HomeRepositoryImpl): HomeRepository
+-}
+\ No newline at end of file
+Index: ../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/network/Resource.kt
+===================================================================
+diff --git a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/network/Resource.kt b/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/network/Resource.kt
+deleted file mode 100644
+--- a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/network/Resource.kt	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,12 +0,0 @@
+-package com.zobaze.assignment.network
+-
+-
+-sealed class Resource<T>(
+-    val data: T? = null,
+-    val message: String? = null
+-) {
+-    class Success<T>(data: T?) : Resource<T>(data)
+-    class
+-    Error<T>(data: T?, message: String?) : Resource<T>(data, message)
+-    class Loading<T>() : Resource<T>()
+-}
+\ No newline at end of file
+Index: ../LearningApp/.idea/runConfigurations.xml
+===================================================================
+diff --git a/../LearningApp/.idea/runConfigurations.xml b/../LearningApp/.idea/runConfigurations.xml
+deleted file mode 100644
+--- a/../LearningApp/.idea/runConfigurations.xml	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,17 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="RunConfigurationProducerService">
+-    <option name="ignoredProducers">
+-      <set>
+-        <option value="com.intellij.execution.junit.AbstractAllInDirectoryConfigurationProducer" />
+-        <option value="com.intellij.execution.junit.AllInPackageConfigurationProducer" />
+-        <option value="com.intellij.execution.junit.PatternConfigurationProducer" />
+-        <option value="com.intellij.execution.junit.TestInClassConfigurationProducer" />
+-        <option value="com.intellij.execution.junit.UniqueIdConfigurationProducer" />
+-        <option value="com.intellij.execution.junit.testDiscovery.JUnitTestDiscoveryConfigurationProducer" />
+-        <option value="org.jetbrains.kotlin.idea.junit.KotlinJUnitRunConfigurationProducer" />
+-        <option value="org.jetbrains.kotlin.idea.junit.KotlinPatternConfigurationProducer" />
+-      </set>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: ../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/ZobazeApp.kt
+===================================================================
+diff --git a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/ZobazeApp.kt b/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/ZobazeApp.kt
+deleted file mode 100644
+--- a/../ZobazeAssignment/app/src/main/java/com/zobaze/assignment/ZobazeApp.kt	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
++++ /dev/null	(revision 5b433ed05cd549dab11587ed84a2eab16ad55fba)
+@@ -1,15 +0,0 @@
+-package com.zobaze.assignment
+-
+-import android.app.Application
+-import com.zobaze.assignment.di.component.AppComponent
+-import com.zobaze.assignment.di.component.DaggerAppComponent
+-
+-class ZobazeApp : Application() {
+-    lateinit var appComponent: AppComponent
+-        private set
+-
+-    override fun onCreate() {
+-        super.onCreate()
+-        appComponent = DaggerAppComponent.builder().build()
+-    }
+-}
+\ No newline at end of file

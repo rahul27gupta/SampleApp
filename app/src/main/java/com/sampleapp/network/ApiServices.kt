@@ -1,11 +1,17 @@
 package com.sampleapp.network
 
+import com.sampleapp.feature.modules.models.Module
 import com.sampleapp.feature.quiz.models.Question
+import retrofit2.Response
 import retrofit2.http.GET
 
 interface ApiServices {
 
     // Quiz API endpoint
-    @GET("raw")
+
+    @GET(ApiConstants.MODULE)
+    suspend fun getQuizModules(): Response<ArrayList<Module>>
+
+    @GET(ApiConstants.QUIZ)
     suspend fun getQuizQuestions(): ArrayList<Question>
 }
